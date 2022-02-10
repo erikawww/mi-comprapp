@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta tagssss -->
+    
+    <link rel="shortcut icon" href="assets/logo-fav.svg" type="image/x-icon">
+    <title>Mi Compraap</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- cabacera -->
+    <header><img src="assets/logo-header.svg" alt=""></header>
+    <main id="fullContainer">
+        <!-- formulario -->
+        <section id="contForm">
+            <div class="modal-body" id="modal-body">
+                <div class="modal-header">
+                    <span id="close-modal">
+                        <img src="assets/close-modal.svg" alt="">
+                    </span>
+                </div>
+                <form action="" id="form" class="form">
+                    <h2>Agregar nuevo producto</h2>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre producto" required>
+                    <div class="custom-select">
+                        <select name="seleccion" id="seleccion" required>
+                            <option selected disabled>Tipo producto</option>
+                            <option value="assets/verduras.svg">Verduras</option>
+                            <option value="assets/milk.svg">Lácteos</option>
+                            <option value="assets/carne.svg">Carne</option>
+                            <option value="assets/logo-fav.svg">Frutas</option>
+                        </select>
+                        <span>
+                            <img src="assets/arrow-select.svg" alt="">
+                        </span>
+                    </div>
+                    <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Descripción producto"></textarea>
+                    <button type="button" id="add">Agregar</button>
+                </form>
+            </div>
+        </section>
+        <!-- lista vacía -->
+        <section id="empty">
+            <p>Aún no agregaste productos a la lista.</p>
+            <img src="assets/lista-vacía.svg" alt="carita triste de alfafor">
+        </section>
+        <!-- lista productos -->
+        <section id="ul">
+            <ul id="lista"></ul>
+        </section>
+        <!-- pantalla detalle producto -->
+        <section id="contDetails">
+            <span id="close-details">
+                <img src="assets/close-modal.svg" alt="">
+            </span>
+            <div id="details"></div>
+        </section>
+        <!-- fab button -->
+        <button type="button" id="fab">
+            <img src="assets/fab.svg" alt="">
+        </button>
+    </main>
+    <script src="js/app.js"></script>
+</body>
+</html>
