@@ -1,94 +1,145 @@
-// variables botones y pantallas
-let fab = document.getElementById("fab");
-let add = document.getElementById("add");
-let contForm = document.getElementById("contForm");
-let form = document.getElementById("form")
-let main = document.getElementById("fullContainer");
-let close = document.getElementById("close-modal")
-let empty = document.getElementById("empty");
-let list = document.getElementById("lista");
-let contList = document.getElementById("ul");
-let btn = document.getElementById("btn");
-let contDetalles = document.getElementById("contDetails");
-let detalles = document.getElementById("details");
+// contenedores
+let fullContainer = document.getElementById('fullContainer')
+let empty = document.getElementById('empty')
+let form = document.getElementById('contForm')
+let modalForm = document.querySelector('.modal-body')
+let listado = document.getElementById('contLista')
+let detalle = document.getElementById('contDetails')
+// botones
+let fab = document.getElementById('fab')
+let cerrar = document.getElementById('close-modal')
 let closeD = document.getElementById("close-details");
+// form,cards etc
+let formProd = document.getElementById('form')
+let listaProd = document.getElementById('lista')
+let detalleProd = document.getElementById('details')
 
-// abrir form
-fab.addEventListener('click', ()=>{
-    empty.style.display="none";
-    contForm.style.display="flex";
-    contList.style.display="none";
-    list.style.display="none";
-    main.style.backgroundColor="rgba(169, 179, 190, 0.78)";
-});
 
-// cerrar form
-close.addEventListener('click', () =>{
-    contForm.style.display="none";
-    main.style.backgroundColor="#fafafa";
-    // if(list.style.display="none"){
-    //     empty.style.display="flex";
-    // }
-    // else{   
-    //     empty.style.display="none";
-    // }
-});
+// click en el fab button
+fab.addEventListener('click', function (event) {
+    form.style.opacity = "1"
+    form.style.visibility = "visible"
+    modalForm.classList.toggle('modal-close')
+})
 
-// botón agregar
-    add.addEventListener('click',(e)=>{
-        e.preventDefault();
-        let nombre = document.getElementById("nombre").value;
-        let select = document.getElementById("seleccion").value;
-        let descript = document.getElementById("descripcion").value;
+// cerrar formulario
+cerrar.addEventListener('click', ()=>{
+    modalForm.classList.toggle('modal-close')
+    setTimeout(() => {
+        // close.style.display="none"  
+        // fab.style.zIndex="1"
+        form.style.opacity = "0"
+        form.style.visibility = "hidden"
+        fullContainer.style.backgroundColor="#fafafa"
+    }, 200);
+})
+
+
+// evento submit cuando el envia el formulario. Creamos un nuevo item dentro del listado.
+formProd.addEventListener('submit', function (event) {
+    event.preventDefault()
+    let titulo = document.getElementById('nombre').value
+    let tipo = document.getElementById('seleccion').value
+    let desc = document.getElementById('descripcion').value
+    let inputNombre = document.querySelector('.nombre')
+    let inputSelect = document.querySelector('.seleccion')
+    if (titulo !="" && tipo !="") {
         let item = `<li class="item">
-                            <img src="${select}" alt="ver detalles">
-                            <p>${nombre}</p>
-                            <button onclick="verDetalles('${nombre}','${select}','${descript}')">
-                                <img src="assets/item-arrow.svg">
-                            </button>
-                        </li>`
-        list.innerHTML += item;
-        form.reset();
+                        <img src="${tipo}" alt="ver detalles">
+                        <p>${titulo}</p>
+                        <button id="verMas" data-titulo="${titulo}" data-tipo="${tipo}" data-desc="${desc}">
+                            <img src="assets/item-arrow.svg">
+                        </button>
+                    </li>`
+
+        listaProd.innerHTML += item
+
+        // para desktop
         if(innerWidth < 769){
-            contForm.style.display="none";
-            empty.style.display="none"
-            contList.style.display="block"
-            contList.style.display="block"
-            list.style.display="block"
-            main.style.backgroundColor="#fafafa";
-        }else{
-            contForm.style.display="flex";
-            empty.style.display="none"
-            contList.style.display="block";
-            fab.style.display="none";
+            empty.style.display = 'none'
+            modalForm.classList.toggle('modal-close')
+            form.style.opacity = "0"
+            form.style.visibility = "hidden"
+            listado.style.display = 'block'
+
+            }else{
+                form.style.display="flex";
+                form.style.opacity = "1"
+                form.style.visibility = "visible"
+                empty.style.display="none"
+                listado.style.display="block";
+                fab.style.display="none";
+            }
+        // form reset
+        formProd.reset()
+        } else {
+            inputNombre.classList.add("incorrecto")
+            inputSelect.classList.add("incorrecto")
         }
-    });
+    })
+    // funcion que muestra el detalle del producto
+function verDetalle(titulo, tipo, desc) {
+    let newProd = `<li id="product">
+                        <div class="product-img">
+                            <img src="${tipo}" alt="">
+                        </div>
+                        <h3>${titulo}</h3>
+                        <p>${desc}</p>
+                    </li>`
 
+    detalleProd.innerHTML = newProd;
 
-// abrir pantalla detalles
-let verDetalles = (nombre,select,descript)=>{
-    contList.style.display="none";
-    detalles.style.display="block";
-    contDetalles.style.display="block";
-    fab.style.display="none";
-    closeD.style.display="flex";
-    let info = `<div id="product">
-                    <div class="product-img">
-                        <img src="${select}" alt="">
-                    </div>
-                    <h3>${nombre}</h3>
-                    <p>${descript}</p>
-                </div>`
-    detalles.innerHTML = info;    
+    if(innerWidth < 769){
+        empty.style.display = 'none'
+        form.style.opacity = "0"
+        form.style.visibility = "hidden"
+   
+        listado.style.display = 'none'
+        detalle.style.display = 'block'
+        detalleProd.style.display="block"
+        fab.style.display="none"
+    }else{
+        form.style.opacity = "1"
+        form.style.visibility = "visible"
+        listado.style.display = 'none'
+        detalle.style.display = 'block'
+        detalleProd.style.display="block"
+    }
 }
+// boton ver detalle en los itesm del listado
+listaProd.addEventListener('click', function (event) {
+    if (event.target.getAttribute('data-titulo')) {
+        console.log('holaaas')
+    let titulo = event.target.getAttribute('data-titulo')
+    let tipo = event.target.getAttribute('data-tipo')
+    let desc = event.target.getAttribute('data-desc')
+
+    verDetalle(titulo, tipo, desc);
+
+    }
+})
+
 // cerrar pantalla detalles
-    closeD.addEventListener('click', ()=>{
-        contList.style.display="block";
-        detalles.style.display="none";
-        closeD.style.display="none";
-        if(innerWidth < 769){
-            fab.style.display="block";
-        }else{
-            fab.style.display="none";
+closeD.addEventListener('click', ()=>{
+    listado.style.display="block";
+    detalle.style.display="none";
+    if(innerWidth < 769){
+        fab.style.display="block";
+    }else{
+        fab.style.display="none";
+    }
+});
+
+if (innerWidth < 769){
+    window.addEventListener('click', (e)=>{
+        console.log(e.target)
+        if (e.target == contForm){
+            modalForm.classList.toggle('modal-close')
+            setTimeout(() => {
+                form.style.opacity = "0"
+                form.style.visibility = "hidden"
+                fullContainer.style.backgroundColor="#fafafa"
+            }, 200);
         }
-    });
+    })
+}

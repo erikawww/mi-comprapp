@@ -9,6 +9,7 @@
 
 body{
     font-family: 'Nunito', sans-serif;
+    background-color: #fafafa;
 }
 header{
     display: flex;
@@ -26,7 +27,7 @@ header img{
 }
 #fullContainer{
     background-color: #fafafa;
-    transition: background-color ease-in-out 100ms;
+    /* transition: background-color ease-in-out 100ms; */
 }
 /*********
 * sections *
@@ -78,12 +79,21 @@ header img{
 * modal *
 ********/
 #contForm{
-    display: none;
-    /* display: flex; */
+    /* display: none; */
+    display: flex;
+    background: rgba(169, 179, 190, 0.78);
+    position:fixed;
+    z-index: 1;
+    width: 100%;
+    height: 90vh;
+    top:10%;
+    left:0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out 100ms;
 }
 .modal-body{
     /* display: none; */
@@ -91,6 +101,21 @@ header img{
     background-color: #fafafa;
     box-shadow:11px 0px 10px rgba(0, 0, 0, 0.07);
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform: scale(1);
+    transition: transform 200ms;
+}
+.modal-close{
+    transform:scale(0)
+}
+#close-modal{
+    background-color: transparent;
+    border:none;
+    margin-right:10px;
+    margin-top: 10px;
+    cursor:pointer;
 }
 .modal-header{
     display: flex;
@@ -124,7 +149,7 @@ header img{
     border-radius: 8px;
 }
 .form h2{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color:#495867;
     font-weight: 400;
     align-self: flex-start;
@@ -141,6 +166,10 @@ form input{
 }
 form input::placeholder{
     color: rgba(73, 88, 103, 0.69);
+}
+.incorrecto{
+    border: solid 1px rgb(255, 0, 0, 0.69);
+    background-color: rgb(255, 0, 0, 0.1);
 }
 .custom-select{
     /* display: flex; */
@@ -209,9 +238,9 @@ form button{
 /******
 **lista**
 ******* */
-#ul{
+#contLista{
     height: 90vh;
-    display:none;
+    /* display:none; */
 }
 .item{
     display: flex;
@@ -224,12 +253,13 @@ form button{
     background: #FAFAFA;
     box-shadow: 1px 2px 4px rgba(73, 88, 103, 0.25);
     height: 92px;
-    margin-top:2vw;
+    margin-top: 10px;
 }
 
 .item img{
     height: 35px;
     margin:15px;
+    pointer-events: none;
 }
 .item p{
     font-size: 20px;
@@ -328,12 +358,19 @@ form button{
     #empty{
         height: 85vh;
     }
+    .modal-close{
+        transform:scale(1)
+    }
     #contForm{
         display:flex;
         height: 85vh;
         background-color: #fafafa;
         padding: 30px;
-        transform: scale(1);
+        width: 50%;
+        /* transform: scale(1); */
+        position: relative;
+        visibility: visible;
+        opacity: 1;
         box-shadow: 1px 0px 4px rgb(0 0 0 / 7%);
     }
     .form h2{
@@ -376,12 +413,13 @@ form button{
     #lista{
         width: 58vw;
     }
-    #ul{
+    #contLista{
         margin: 2vw;
         height:79vh;
-        width: 80vw;
+        width: 80%;
         overflow-y: scroll;
         overflow-X: hidden;
+        display: none;
 
     }
     .item{
@@ -396,14 +434,14 @@ form button{
         width: 42vw;
     }        
     #details{
-        width: 60vw;
+        width: 100%;
         height: 39vw;
-/*         
-        width:60vw;
-        height:47vw; */
+    }
+    #contDetails{
+        width: 80%;
     }
     #close-details{
-        border: none;
+        width: 80%;
         background-color: transparent;
     }
 }

@@ -7,7 +7,7 @@
     <!-- meta tagssss -->
     
     <link rel="shortcut icon" href="assets/logo-fav.svg" type="image/x-icon">
-    <title>Mi Compraap</title>
+    <title>Mi Comprapp</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,39 +16,40 @@
     <main id="fullContainer">
         <!-- formulario -->
         <section id="contForm">
-            <div class="modal-body" id="modal-body">
+            <div class="modal-body modal-close" id="modal-body">
                 <div class="modal-header">
-                    <span id="close-modal">
+                    <button id="close-modal">
                         <img src="assets/close-modal.svg" alt="">
-                    </span>
+                    </button>
                 </div>
-                <form action="" id="form" class="form">
+                <form id="form" class="form">
                     <h2>Agregar nuevo producto</h2>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre producto" required>
+                    <input type="text" value="" id="nombre" class="nombre input" placeholder="Nombre producto">
                     <div class="custom-select">
-                        <select name="seleccion" id="seleccion" required>
+                        <select id="seleccion" class="seleccion input">
                             <option selected disabled>Tipo producto</option>
                             <option value="assets/verduras.svg">Verduras</option>
                             <option value="assets/milk.svg">Lácteos</option>
                             <option value="assets/carne.svg">Carne</option>
                             <option value="assets/logo-fav.svg">Frutas</option>
+                            <!-- despensa, baño, limpieza, bebidas, panificados, congelados -->
                         </select>
                         <span>
                             <img src="assets/arrow-select.svg" alt="">
                         </span>
                     </div>
-                    <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Descripción producto"></textarea>
-                    <button type="button" id="add">Agregar</button>
+                    <textarea class="form-control" id="descripcion" placeholder="Descripción producto"></textarea>
+                    <button id="add">Agregar</button>
                 </form>
             </div>
         </section>
         <!-- lista vacía -->
         <section id="empty">
             <p>Aún no agregaste productos a la lista.</p>
-            <img src="assets/lista-vacía.svg" alt="carita triste de alfafor">
+            <img src="assets/lista-vacia.svg" alt="carita triste">
         </section>
         <!-- lista productos -->
-        <section id="ul">
+        <section id="contLista">
             <ul id="lista"></ul>
         </section>
         <!-- pantalla detalle producto -->
@@ -56,7 +57,7 @@
             <span id="close-details">
                 <img src="assets/close-modal.svg" alt="">
             </span>
-            <div id="details"></div>
+            <ul id="details"></ul>
         </section>
         <!-- fab button -->
         <button type="button" id="fab">
